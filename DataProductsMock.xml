@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<ArrayOfProductDTO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProductDTO>
+    <Id>xDgnEowe4u</Id>
+    <Name>teddy</Name>
+    <Description>short desctription</Description>
+    <Picture>https://images.unsplash.com/photo-1544719576-904e2d01e057?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=400&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNjU4M30</Picture>
+    <PriceUsd>
+      <CurrencyCode>USD</CurrencyCode>
+      <Units>23412</Units>
+      <Nanos>234</Nanos>
+    </PriceUsd>
+    <Categories>
+      <string>SAVAGE</string>
+      <string>EXTREME</string>
+    </Categories>
+  </ProductDTO>
+  <ProductDTO>
+    <Id>B1OKdoW8Rs</Id>
+    <Name>teddy</Name>
+    <Description>short desctription</Description>
+    <Picture>https://images.unsplash.com/photo-1544719576-904e2d01e057?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=400&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNjU4M30</Picture>
+    <PriceUsd>
+      <CurrencyCode>USD</CurrencyCode>
+      <Units>23412</Units>
+      <Nanos>234</Nanos>
+    </PriceUsd>
+    <Categories>
+      <string>SAVAGE</string>
+      <string>EXTREME</string>
+    </Categories>
+  </ProductDTO>
+  <ProductDTO>
+    <Id>AU1muhreFQ</Id>
+    <Name>teddy</Name>
+    <Description>short desctription</Description>
+    <Picture>https://images.unsplash.com/photo-1544719576-904e2d01e057?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=400&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNjU4M30</Picture>
+    <PriceUsd>
+      <CurrencyCode>USD</CurrencyCode>
+      <Units>23412</Units>
+      <Nanos>234</Nanos>
+    </PriceUsd>
+    <Categories>
+      <string>SAVAGE</string>
+      <string>EXTREME</string>
+    </Categories>
+  </ProductDTO>
+  <ProductDTO>
+    <Id>8eFBltiuJw</Id>
+    <Name>teddy</Name>
+    <Description>short desctription</Description>
+    <Picture>https://images.unsplash.com/photo-1544719576-904e2d01e057?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=400&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNjU4M30</Picture>
+    <PriceUsd>
+      <CurrencyCode>USD</CurrencyCode>
+      <Units>23412</Units>
+      <Nanos>234</Nanos>
+    </PriceUsd>
+    <Categories>
+      <string>SAVAGE</string>
+      <string>EXTREME</string>
+    </Categories>
+  </ProductDTO>
+</ArrayOfProductDTO>
