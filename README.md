@@ -1,4 +1,4 @@
-#ProductCatalogService.
+# ProductCatalogService.
 Please set the following environment variables to use the API.
 
 1. db_products_server : stk-academia-demo.database.windows.net
