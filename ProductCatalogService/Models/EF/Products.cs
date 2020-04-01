@@ -23,7 +23,7 @@ namespace ProductCatalogService.Models.EF
         public string CurrencyCode { get; set; }
         public decimal PriceClient { get; set; }
         public decimal MemberDiscount { get; set; }
-        public int IsEnabled { get; set; }
+        public bool IsEnabled { get; set; }
         public string Keywords { get; set; }
         public DateTime DateUpdate { get; set; }
 
