@@ -19,9 +19,9 @@ namespace ProductCatalogService.Models
         {
             try
             {
-                var productInDb = db.Products.FirstOrDefault(p => p.Title == idProduct && p.IsEnabled == true);
+                var productInDb = db.Products.FirstOrDefault(p => p.Title == idProduct && p.IsEnabled == 1);
                 if (productInDb != null)
-                    productInDb.IsEnabled = false;
+                    productInDb.IsEnabled = 1;
                 db.SaveChanges();
                 return true;
             }
@@ -51,7 +51,7 @@ namespace ProductCatalogService.Models
                     MemberDiscount = 1,
                     Keywords = string.Join("-", productDTO.Categories).ToUpper(),
                     DateUpdate = DateTime.Now,
-                    IsEnabled = true
+                    IsEnabled = 1
                 }).Entity;
                 db.SaveChanges();
 
@@ -69,7 +69,7 @@ namespace ProductCatalogService.Models
         {
             try
             {
-                var productInDB = db.Products.FirstOrDefault(p => p.Title == idProduct && p.IsEnabled == true);
+                var productInDB = db.Products.FirstOrDefault(p => p.Title == idProduct && p.IsEnabled == 1);
                 if (productInDB != null)
                     return new ProductDTO
                     {
@@ -98,7 +98,7 @@ namespace ProductCatalogService.Models
             try
             {
                 var ProductsInDb = db.Products
-                    .Where(p => p.Nombre.Contains(name) && p.IsEnabled == true)
+                    .Where(p => p.Nombre.Contains(name) && p.IsEnabled == 1)
                     .Select(p => new ProductDTO
                     {
                         Id = p.Title,
@@ -131,7 +131,7 @@ namespace ProductCatalogService.Models
         {
             try
             {
-                int totalOfProducts = db.Products.Where(p => p.IsEnabled == true).Count();
+                int totalOfProducts = db.Products.Where(p => p.IsEnabled == 1).Count();
                 int totalPages = totalOfProducts / numItems;
                 if (totalOfProducts % numItems > 0)
                     totalPages++;
@@ -140,7 +140,7 @@ namespace ProductCatalogService.Models
                     throw new Exception("Page number gater than total pages");
 
                 var pageBuilded = db.Products
-                    .Where(p => p.IsEnabled == true)
+                    .Where(p => p.IsEnabled == 1)
                     .OrderBy(p => p.Id)
                     .Skip(--page * numItems)
                     .Take(numItems)
@@ -175,7 +175,7 @@ namespace ProductCatalogService.Models
         {
             try
             {
-                var productOnDb = db.Products.FirstOrDefault(p => p.Title == product.Id && p.IsEnabled == true);
+                var productOnDb = db.Products.FirstOrDefault(p => p.Title == product.Id && p.IsEnabled == 1);
                 if (productOnDb != null)
                 {
                     productOnDb.Nombre = product.Name;
