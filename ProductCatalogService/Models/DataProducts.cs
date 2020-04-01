@@ -139,7 +139,7 @@ namespace ProductCatalogService.Models
                 if (page > totalPages)
                     return new PageDTO
 					{
-						TotalItems = 0,
+						TotalItems = totalPages,
 						Products = new List<ProductCatalogService.Models.ProductDTO>()
 					};
 
