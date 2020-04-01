@@ -137,7 +137,11 @@ namespace ProductCatalogService.Models
                     totalPages++;
 
                 if (page > totalPages)
-                    throw new Exception("Page number gater than total pages");
+                    return new PageDTO
+					{
+						TotalItems = 0,
+						Products = new List<ProductCatalogService.Models.ProductDTO>()
+					};
 
                 var pageBuilded = db.Products
                     .Where(p => p.IsEnabled == 1)
