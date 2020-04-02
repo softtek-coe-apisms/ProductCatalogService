@@ -23,8 +23,9 @@ namespace ProductCatalogService.Models
             try
             {
                 var productInDb = db.Products.FirstOrDefault(p => p.Title == idProduct && p.IsEnabled == true);
-                if (productInDb != null)
-                    productInDb.IsEnabled = false;
+                if (productInDb == null)
+                    return false;
+                productInDb.IsEnabled = false;
                 db.SaveChanges();
                 return true;
             }

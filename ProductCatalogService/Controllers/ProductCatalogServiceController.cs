@@ -89,7 +89,7 @@ namespace ProductCatalogService.Controllers
             {
                 if (db.Update(productDTO))
                     return Ok();
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status404NotFound);
             }
             catch (Exception e)
             {
@@ -106,7 +106,7 @@ namespace ProductCatalogService.Controllers
             {
                 if (db.Delete(id))
                     return Ok();
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status404NotFound);
             }
             catch (Exception e)
             {
