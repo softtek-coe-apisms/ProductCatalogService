@@ -10,7 +10,7 @@ namespace ProductCatalogService.Interfaces
     {
         ProductDTO Insert(ProductDTO product);
         ProductDTO SelectById(string idProduct);
-        PageDTO SelectByName(string name);
+        PageDTO SelectByName(string name, int page, int numItems);
         PageDTO SelectPage(int page, int numItems);
         bool Update(ProductDTO product);
         bool Delete(string idProduct);

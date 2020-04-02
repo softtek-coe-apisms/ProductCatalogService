@@ -54,13 +54,13 @@ namespace ProductCatalogService.Models
             return contextMock.FirstOrDefault(p => p.Id == idProduct);
         }
 
-        public PageDTO SelectByName(string name)
+        public PageDTO SelectByName(string name, int page, int numItems)
         {
             contextMock = XMLFile.DeserializeList<List<ProductDTO>>(FILE_NAME);
 
             var products = contextMock.Where(p => p.Name == name).ToList();
             if (products != null)
-                return new PageDTO { TotalItems = products.Count(), Products = products };
+                return new PageDTO { TotalPages = 1, TotalProducts = products.Count(), Products = products };
             return new PageDTO();
         }
 
@@ -68,7 +68,7 @@ namespace ProductCatalogService.Models
         {
             contextMock = XMLFile.DeserializeList<List<ProductDTO>>(FILE_NAME);
 
-            return new PageDTO { TotalItems = contextMock.Count, Products = contextMock };
+            return new PageDTO { TotalProducts = contextMock.Count(), TotalPages = 1, Products = contextMock };
         }
 
         public bool Update(ProductDTO product)

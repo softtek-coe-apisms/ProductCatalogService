@@ -10,6 +10,9 @@ namespace ProductCatalogService.Models
 {
     public class DataProducts : DataSource, IProductsDb
     {
+        public const string NO_PRODUCTS_FOUND = "No Products Found";
+        public const string PAGE_NOT_EXIST = "The request page does not exist";
+
         public DataProducts()
         {
             db = new DataProductsContext();
@@ -20,19 +23,13 @@ namespace ProductCatalogService.Models
             try
             {
                 var productInDb = db.Products.FirstOrDefault(p => p.Title == idProduct && p.IsEnabled == true);
-				Console.WriteLine(productInDb);
-				
-                if (productInDb != null){
-					db.Entry(productInDb).Property(x => x.IsEnabled).IsModified = true;
+                if (productInDb != null)
                     productInDb.IsEnabled = false;
-				}
-				
                 db.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
-				Console.WriteLine(e);
                 throw e;
             }
         }
@@ -91,7 +88,7 @@ namespace ProductCatalogService.Models
                         },
                         Categories = productInDB.Keywords.Split("-").ToList()
                     };
-                throw new Exception("Product not found");
+                throw new Exception(NO_PRODUCTS_FOUND);
             }
             catch (Exception e)
             {
@@ -99,12 +96,23 @@ namespace ProductCatalogService.Models
             }
         }
 
-        public PageDTO SelectByName(string name)
+        public PageDTO SelectByName(string name, int page, int numItems)
         {
             try
             {
+                int totalOfProducts = db.Products.Where(p => p.Nombre.Contains(name) && p.IsEnabled == true).Count();
+                int totalPages = totalOfProducts / numItems;
+                if (totalOfProducts % numItems > 0)
+                    totalPages++;
+
+                if (page > totalPages)
+                    throw new Exception(PAGE_NOT_EXIST);
+
                 var ProductsInDb = db.Products
                     .Where(p => p.Nombre.Contains(name) && p.IsEnabled == true)
+                    .OrderBy(p => p.Id)
+                    .Skip(--page * numItems)
+                    .Take(numItems)
                     .Select(p => new ProductDTO
                     {
                         Id = p.Title,
@@ -118,14 +126,17 @@ namespace ProductCatalogService.Models
                             Nanos = int.Parse(p.PriceClient.ToString().Split('.', StringSplitOptions.None)[1])
                         },
                         Categories = p.Keywords.Split('-', StringSplitOptions.None).ToList()
-                    }).ToList();
+                    })
+                    .ToList();
                 if (ProductsInDb != null)
                     return new PageDTO
                     {
-                        TotalItems = ProductsInDb.Count(),
+                        TotalPages = totalPages,
+                        TotalProducts = ProductsInDb.Count(),
                         Products = ProductsInDb
                     };
-                throw new Exception("NO Products found where match the name");
+
+                throw new Exception("No products fount");
             }
             catch (Exception e)
             {
@@ -143,11 +154,7 @@ namespace ProductCatalogService.Models
                     totalPages++;
 
                 if (page > totalPages)
-                    return new PageDTO
-					{
-						TotalItems = totalPages,
-						Products = new List<ProductCatalogService.Models.ProductDTO>()
-					};
+                    throw new Exception(PAGE_NOT_EXIST);
 
                 var pageBuilded = db.Products
                     .Where(p => p.IsEnabled == true)
@@ -171,7 +178,8 @@ namespace ProductCatalogService.Models
                     .ToList();
                 return new PageDTO
                 {
-                    TotalItems = totalPages,
+                    TotalPages = totalPages,
+                    TotalProducts = pageBuilded.Count,
                     Products = pageBuilded
                 };
             }

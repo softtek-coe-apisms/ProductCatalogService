@@ -9,7 +9,8 @@ namespace ProductCatalogService.Models
     {
 
         public List<ProductDTO> Products { get; set; }
-        public int TotalItems { get; set; }
+        public int TotalProducts { get; set; }
+        public int TotalPages { get; set; }
 
     }
 }

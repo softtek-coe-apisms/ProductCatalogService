@@ -36,7 +36,6 @@ namespace ProductCatalogService.Controllers
             }
             catch (Exception e)
             {
-				Console.WriteLine(e);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -48,14 +47,20 @@ namespace ProductCatalogService.Controllers
         {
             try
             {
-                if (pageNumber.HasValue)
+                if (pageNumber.HasValue && name != null)
+                    return Ok(db.SelectByName(name, pageNumber.Value, 15));
+                else if (name != null)
+                    return Ok(db.SelectByName(name, 1, 15));
+                else if (pageNumber.HasValue)
                     return Ok(db.SelectPage(pageNumber.Value, 15));
-                else
-                    return Ok(db.SelectByName(name));
+                throw new Exception();
             }
             catch (Exception e)
             {
-				Console.WriteLine(e);
+                if (e.Message == DataProducts.NO_PRODUCTS_FOUND)
+                    return Ok(new PageDTO());
+                else if (e.Message == DataProducts.PAGE_NOT_EXIST)
+                    return Ok(new PageDTO());
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
