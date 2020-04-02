@@ -20,13 +20,19 @@ namespace ProductCatalogService.Models
             try
             {
                 var productInDb = db.Products.FirstOrDefault(p => p.Title == idProduct && p.IsEnabled == true);
-                if (productInDb != null)
-                    productInDb.IsEnabled = true;
+				Console.WriteLine(productInDb);
+				
+                if (productInDb != null){
+					db.Entry(productInDb).Property(x => x.IsEnabled).IsModified = true;
+                    productInDb.IsEnabled = false;
+				}
+				
                 db.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
+				Console.WriteLine(e);
                 throw e;
             }
         }
