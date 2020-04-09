@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: productcatalogservice
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: productcatalogservice
+    spec:
+      containers:
+        - name: productcatalogservice
+          image: 'softtekcoeapisms/productcatalogservice:1.0'
+          ports:
+            - containerPort: 80
+          env:
+          - name: db_products_server
+            value: stk-academia-demo.database.windows.net
+          - name: db_products_user
+            value: he-man
+          - name: db_products_password
+            value: yGvGnqfqwN3bsyq
+          - name: db_products_name_db
+            value: DataProducts
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: productcatalogservice
+  labels:
+    name: productcatalogservice
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: productcatalogservice
+  type: ClusterIP
